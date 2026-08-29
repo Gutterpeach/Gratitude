@@ -8,7 +8,7 @@
   "theme_color": "#C8A3E6",
   "icons": [
     {
-      "src": "https://img.icons8.com/plasticine/512/leaf.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
