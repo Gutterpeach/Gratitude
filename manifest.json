@@ -1,13 +1,14 @@
 {
   "name": "Daily Gratitude",
   "short_name": "Gratitude",
-  "start_url": "/Gratitude/",
+  "start_url": "/Gratitude/index.html",
+  "scope": "/Gratitude/",
   "display": "standalone",
   "background_color": "#C8A3E6",
   "theme_color": "#C8A3E6",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/2904/2904847.png",
+      "src": "https://img.icons8.com/plasticine/512/leaf.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
