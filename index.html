@@ -65,11 +65,11 @@
         <button class="tab-btn" id="btn-evening" onclick="switchTab('Evening')">🌙 Evening</button>
       </div>
 
-      <form id="gratitude-form">
+     <form id="gratitude-form" autocomplete="off">
         <input type="hidden" id="editing-id" value="">
-        <input type="text" class="gratitude-input" id="entry-1" placeholder="1. I am grateful for..." required>
-        <input type="text" class="gratitude-input" id="entry-2" placeholder="2. I am grateful for..." required>
-        <input type="text" class="gratitude-input" id="entry-3" placeholder="3. I am grateful for..." required>
+        <input type="text" class="gratitude-input" id="entry-1" placeholder="1. I am grateful for..." required autocomplete="off" name="gratitude_1_no_autofill">
+        <input type="text" class="gratitude-input" id="entry-2" placeholder="2. I am grateful for..." required autocomplete="off" name="gratitude_2_no_autofill">
+        <input type="text" class="gratitude-input" id="entry-3" placeholder="3. I am grateful for..." required autocomplete="off" name="gratitude_3_no_autofill">
 
         <div class="file-input-wrapper">
           <label for="photo-upload" class="file-label">📷 Attach a Photo (Optional)</label>
