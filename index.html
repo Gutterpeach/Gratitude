@@ -18,7 +18,12 @@
     
     .app-container { width: 100%; max-width: 480px; background: rgba(255, 255, 255, 0.3); padding: 20px; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(106, 81, 125, 0.15); backdrop-filter: blur(10px); }
     h1, h2 { color: #6A517D; text-align: center; margin-top: 0; }
-    .subtitle { text-align: center; font-size: 0.9em; margin-bottom: 20px; opacity: 0.9; }
+    
+    /* Date Navigation Controls */
+    .date-navigator { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .date-nav-btn { background: rgba(255, 255, 255, 0.6); border: none; color: #6A517D; font-weight: bold; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85em; }
+    .date-nav-btn:hover { background: rgba(255, 255, 255, 0.9); }
+    .subtitle { text-align: center; font-size: 0.9em; opacity: 0.9; margin: 0; }
     
     .page-view { display: none; }
     .page-view.active { display: block; }
@@ -57,7 +62,12 @@
 
   <div class="app-container">
     <h1>🍃 Daily Gratitude</h1>
-    <div class="subtitle" id="current-date"></div>
+    
+    <div class="date-navigator">
+      <button class="date-nav-btn" onclick="changeDate(-1)">◀ Prev Day</button>
+      <div class="subtitle" id="current-date"></div>
+      <button class="date-nav-btn" onclick="changeDate(1)">Next Day ▶</button>
+    </div>
 
     <div id="page-home" class="page-view active">
       <div class="tab-buttons">
@@ -113,9 +123,20 @@
   <script>
     let currentMode = 'Morning';
     let swRegistration = null;
+    let selectedDate = new Date();
 
     const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString(undefined, options);
+    
+    function updateDateDisplay() {
+      document.getElementById('current-date').textContent = selectedDate.toLocaleDateString(undefined, options);
+    }
+
+    function changeDate(days) {
+      selectedDate.setDate(selectedDate.getDate() + days);
+      updateDateDisplay();
+    }
+
+    updateDateDisplay();
 
     if ('serviceWorker' in navigator) {
       const swCode = `
@@ -181,6 +202,7 @@
 
     function saveToStorage(e1, e2, e3, image, editingId) {
       let logs = JSON.parse(localStorage.getItem('gratitude_logs') || '[]');
+      const entryDate = selectedDate.toLocaleDateString(undefined, options);
 
       if (editingId) {
         logs = logs.map(item => {
@@ -191,8 +213,8 @@
         });
         alert('Entry updated! 🍃');
       } else {
-        logs.unshift({ id: Date.now(), date: new Date().toLocaleDateString(undefined, options), timeOfDay: currentMode, items: [e1, e2, e3], image: image });
-        alert(`${currentMode} gratitude saved! 🍃`);
+        logs.unshift({ id: Date.now(), date: entryDate, timeOfDay: currentMode, items: [e1, e2, e3], image: image });
+        alert(`${currentMode} gratitude saved for ${entryDate}! 🍃`);
       }
 
       localStorage.setItem('gratitude_logs', JSON.stringify(logs));
